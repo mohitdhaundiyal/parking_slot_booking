@@ -44,7 +44,7 @@ $data .='
         '.strtoupper($row3['user_name']).'<br><hr>
         SLOT NUMBER : '.$row['slot_id'].'<br><hr>
         DATE : '.$row['slot_date'].'<br><hr>
-        TIME : '.$row['slot_time'].'<br><hr>
+        TIME : '.$row['start_time'].'<br><hr>
 		VEHICLE NUMBER : '.$row['user_vehicleno'].'<br><hr>
 		<b>PLEASE SHOW THIS QR CODE DURING ENTRY & EXIT</b><br>
 		</div>

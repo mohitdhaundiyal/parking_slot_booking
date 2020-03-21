@@ -14,10 +14,10 @@ $sql="SELECT * FROM parking_details WHERE user_id=$user_id";
 $result=mysqli_query($conn, $sql);
 $row=mysqli_fetch_assoc($result);
 
-$slot_time=$row['slot_time'];
+$start_time=$row['start_time'];
 $slot_date=$row['slot_date'];
 
-$booking_code = $user_id . $slot_id . $slot_date . $slot_time;
+$booking_code = $user_id . $slot_id . $slot_date . $start_time;
 //."-". rand(10*45, 100*98)
 
 $sql3="UPDATE `slot_master` SET `slot_status`=1 WHERE slot_id=$slot_id";
@@ -107,7 +107,7 @@ $row3=mysqli_fetch_assoc($result3);
                             <h4 class="card-text"><?php echo strtoupper($row3['user_name']);?></h4>
                             <li class="list-group-item">SLOT NUMBER : <?php echo $slot_id;?></li>
                             <li class="list-group-item">DATE : <?php echo $row['slot_date'];?></li>
-                            <li class="list-group-item">TIME : <?php echo $row['slot_time'];?></li>
+                            <li class="list-group-item">TIME : <?php echo $row['start_time'];?></li>
                             <li class="list-group-item">VEHICLE NUMBER : <?php echo $row['user_vehicleno'];?></li>
                             <li class="list-group-item"><b>PLEASE SHOW THIS QR CODE DURING ENTRY & EXIT</b></li>
                         </ul>

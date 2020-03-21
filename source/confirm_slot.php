@@ -59,7 +59,7 @@ $user_vehicleno=$row_datetime['user_vehicleno'];
                             <h4>
                                 <p>YOU SELECTED <b></Select> SLOT <?php echo $slot_id; ?></b><br>
                                     DATE: <b><?php echo $row_datetime['slot_date'];?></b><br>
-                                    TIME: <b><?php echo $row_datetime['slot_time'];?></b><br>
+                                    TIME: <b><?php echo $row_datetime['start_time'];?></b><br>
                                     VEHICLE NUMBER: <b><?php echo $user_vehicleno;?></b>
                                 </p>
                             </h4>

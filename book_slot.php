@@ -24,11 +24,18 @@ if(isset($_POST['submit'])){
     //echo $slot_date;
 
     $exit_time=date('H:i',strtotime($start_time.'+ '.$no_of_hr.' hour'));
+
+    $sql_check="SELECT * FROM parking_details WHERE user_id='$user_id'";
+    $result_check=mysqli_query($conn,$sql_check);
+    if(mysqli_fetch_assoc($result_check)==0){
     $sql="INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `start_time`,`no_of_hr`,`exit_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$start_time','$no_of_hr','$exit_time')";
     //echo $sql;exit;
     $result=mysqli_query($conn,$sql);
-   
     //echo $exit_time; exit;
+}else {
+$sql="UPDATE `parking_details` SET `slot_date`='$slot_date',`start_time`='$slot_time',`no_of_hr`='$no_of_hr',`exit_time`='$exit_time' WHERE $user_id='$user_id'";
+$result=mysqli_query($conn,$sql);
+}
 }
 ?>
 
