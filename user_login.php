@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('include/connect.php');
-if(isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])){
-header("location:user_dashboard.php");
+if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+    header("location:user_dashboard.php");
 }
 ?>
 <!DOCTYPE html>
@@ -57,22 +57,32 @@ header("location:user_dashboard.php");
 
 <body>
     <?php
-include('header.php');
-?>
+    include('header.php');
+    ?>
     <div class="container">
         <hr>
         <div class="center">
             <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <?php
-                        if(isset($_GET['status']) && $_GET['status'] == 1 ){
-                            ?>
 
+                    <?php
+                    //sucessfully registered message
+                    if (isset($_GET['status']) && $_GET['status'] == 1) {
+                    ?>
                     <div class="alert alert-success" role="alert">
-                        Sucessfully registered! Login
+                        Sucessfully registered!
                     </div>
-                    <?php  }  ?>
+                    <?php  } else 
+                    if (isset($_GET['status']) == 2) {
+                    ?>
+                    <div class="alert alert-danger" role="alert">
+                        Invalid User!
+                    </div>
+                    <?php
+                    } ?>
+
+
                     <div class="card">
                         <div class="card-header">
                             <h5>User Login</h5>

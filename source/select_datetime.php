@@ -1,8 +1,7 @@
 <?php
-//SESSION
 session_start();
-if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
-	header("location:../user_login.php");
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("location:../user_login.php");
 }
 include('../include/connect.php');
 ?>
@@ -16,6 +15,17 @@ include('../include/connect.php');
     <title>Confirm Slot</title>
     <link href="../assets/css/bootstrap.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
+    <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script language="javascript">
+    $(document).ready(function() {
+        $("#txtdate").datepicker({
+            minDate: 0,
+            maxDate: 1
+        });
+    });
+    </script>
 
     <style>
     .card {
@@ -39,7 +49,6 @@ include('../include/connect.php');
 
     }
     </style>
-
 </head>
 
 <body>
@@ -52,10 +61,10 @@ include('../include/connect.php');
                         Enter Details
                     </div>
                     <div class="card-body">
-                        <form action="../book_slot.php?user_id=<?php echo $_SESSION['user_id'];?>" method="post">
+                        <form action="../book_slot.php?user_id=<?php echo $_SESSION['user_id']; ?>" method="post">
 
                             <div class="form-label"><small><b>Date</b></small></div>
-                            <input type="date" name="slot_date" class="form-control" required>
+                            <input type="text" name="slot_date" id="txtdate" class="form-control" required>
 
                             <div class="form-label"><small><b>Start Time [hh:mm:AM/PM]</b></small></div>
                             <input type="time" name="start_time" class="form-control" required>

@@ -56,4 +56,3 @@ $data .='
 		$mpdf->Output ('parking_booking_reciept.pdf', 'D');
 		
 		//header('location:user_dashboard.php');
-        ?>

@@ -1,72 +1,10 @@
 <?php
-session_start();
-if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
-	header("location:../user_login.php");
-}
-include('include/connect.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <style>
-    .card {
-        border-radius: 0;
-    }
-
-    small {}
-    </style>
-</head>
-
-<body>
-    <?php include('header_user.php'); ?>
-    <div class="container">
-        <h3>Select available slot for parking</h3>
-
-        <hr>
-        <div class="row">
-
-            <?php
-            $sql="SELECT * FROM slot_master";
-            $result=mysqli_query($conn,$sql);
-
-            while($data=mysqli_fetch_array($result)){
-
-for($i=1;$i<=60;$i++){?>
-            <div class=col-lg-1>
-                <div class="card bg-light mb-2" style="width: 100px; length:100px">
-                    <div class="card-header">
-                        <small> SLOT <?php echo $data['id'];?></small>
-                    </div>
-                </div>
-            </div>
-            <?php
-}}
-?>
-            </form>
-        </div>
-    </div>
-</body>
-
-</html>
-
-
-
-
-
-
-
-<?php
+//SESSION
 session_start();
 if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
 	header("location:user_login.php");
 }
-include('include/connect.php');
+include('include/connect.php'); //CONNECTION
 
 $user_id=$_GET['user_id'];
 $sql_user="SELECT * FROM users WHERE user_id='$user_id'";
@@ -81,25 +19,11 @@ $user_vehicleno=$row_user['user_vehicleno'];
 
 if(isset($_POST['submit'])){
     $slot_date=$_POST['slot_date'];
-    $start_time=$_POST['start_time'];
-    $no_of_hr=$_POST['no_of_hr'];
+    $slot_time=$_POST['slot_time'];
     //echo $slot_date;
-
-    $exit_time=date('H:i',strtotime($start_time.'+ '.$no_of_hr.' hour'));
-echo $exit_time;exit;
-    $sql_check="SELECT * FROM parking_details WHERE user_id='$user_id'";
-    $result_check=mysqli_query($conn,$sql_check);
-
-
-    if(mysqli_fetch_assoc($result_check)==0){
-    $sql="INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `start_time`,`no_of_hr`,`exit_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$start_time','$no_of_hr','$exit_time')";
+    $sql="INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `slot_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$slot_time')";
     //echo $sql;exit;
     $result=mysqli_query($conn,$sql);
-    //echo $exit_time; exit;
-}else {
-$sql="UPDATE `parking_details` SET `slot_date`='$slot_date',`start_time`='$slot_time',`no_of_hr`='$no_of_hr',`exit_time`='$exit_time' WHERE $user_id='$user_id'";
-$result=mysqli_query($conn,$sql);
-}
 }
 ?>
 
@@ -144,14 +68,7 @@ $result=mysqli_query($conn,$sql);
                 $result_slot=mysqli_query($conn,$sql_slot);
                 while($data=mysqli_fetch_array($result_slot)){
                     
-                    $sql_main="SELECT * FROM parking_details";
-                    $result_main=mysqli_query($conn,$sql_main); 
-                    $row_main=mysqli_fetch_array($result_main);
-                    $initial_start_time=$row_main['start_time'];
-                    $initial_exit_time=$row_main['exit_time'];
-                    echo $start_time;exit;
-                    
-                    if ($exit_time < $initial_start_time && $start_time > $initial_start_time){ ?>
+                if($data['slot_status']==0){ ?>
 
             <div class="col-lg-2">
                 <a type=" button" class="btn btn-outline-primary btn-lg btn-block"
@@ -161,7 +78,8 @@ $result=mysqli_query($conn,$sql);
             </div>
 
             <?php }
-                else { ?>
+                else if($data['slot_status']==1){ ?>
+
             <div class="col-lg-2">
                 <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Slot
                     <?php echo $data['slot_id'];?>

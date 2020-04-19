@@ -10,25 +10,45 @@ include('include/connect.php');
     <title>Parking</title>
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-    body {
-        background-image: url('images/wall4.jpg');
-        position: auto;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
+    .container {
+        text-align: center;
+        margin-top: 15%;
+    }
+
+    .list-group-item {
+        padding: 20px !important;
+        font-size: 1.5rem;
+        transition: all 0.5s ease;
+        color: black;
+    }
+
+    .list-group-item:hover {
+        background: black;
+        color: white;
     }
     </style>
 </head>
 
 <body>
     <?php include('header.php'); ?>
-    <h2>
-        <center>
-            <font color="white">BOOK YOUR PARKING SPACE<br><br></font>
-        </center>
-    </h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="card">
+                    <ul class=" list-group list-group-flush">
+                        <a href="register.php" class="list-group-item">Register</a>
+                        <a href="user_login.php" class="list-group-item">Login</a>
+                        <a href="admin_login.php" class="list-group-item">Admin</a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
 </body>
 
 </html>

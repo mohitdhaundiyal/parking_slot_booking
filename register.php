@@ -38,7 +38,7 @@ include('include/connect.php');
 </head>
 
 <body>
-    <?php include('header.php');?>
+    <?php include('header.php'); ?>
     <hr>
     <div class="container-fluid">
         <div class="row">

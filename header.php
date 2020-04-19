@@ -28,10 +28,6 @@
                 <a href="user_login.php" class="nav-link">
                     User Login<span class="sr-only">(current)</span></a>
             </li>
-            <li> <a href="admin/admin_login.php" class="nav-link"><img src="images/icon/user.png" width="18px"
-                        height="18px">
-                    Admin Login<span class="sr-only">(current)</span></a>
-            </li>
         </ul>
     </div>
 </nav>

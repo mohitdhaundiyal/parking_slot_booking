@@ -1,44 +1,38 @@
 <?php
-//SESSION
 session_start();
-if(!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])){
-	header("location:user_login.php");
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("location:user_login.php");
 }
-include('include/connect.php'); //CONNECTION
+include('include/connect.php');
 
-$user_id=$_GET['user_id'];
-$sql_user="SELECT * FROM users WHERE user_id='$user_id'";
-$result_user=mysqli_query($conn,$sql_user);
-//echo $sql_user;exit;
-$row_user=mysqli_fetch_assoc($result_user);
-//echo $row_user['user_name'];
-$user_name=$row_user['user_name'];
-$user_vehicleno=$row_user['user_vehicleno'];
-//echo $user_vehicleno;exit;
+$user_id = $_GET['user_id'];
+$sql_user = "SELECT * FROM users WHERE user_id='$user_id'";
+$result_user = mysqli_query($conn, $sql_user);
+$row_user = mysqli_fetch_assoc($result_user);
+$user_name = $row_user['user_name'];
+$user_vehicleno = $row_user['user_vehicleno'];
 
-
-if(isset($_POST['submit'])){
-    $slot_date=$_POST['slot_date'];
-    $start_time=$_POST['start_time'];
-    $no_of_hr=$_POST['no_of_hr'];
+if (isset($_POST['submit'])) {
+    $slot_date = $_POST['slot_date'];
+    //echo $slot_date; exit;
+    $start_time = $_POST['start_time'];
+    $no_of_hr = $_POST['no_of_hr'];
     //echo $slot_date;
 
-    $exit_time=date('H:i',strtotime($start_time.'+ '.$no_of_hr.' hour'));
-
-    $sql_check="SELECT * FROM parking_details WHERE user_id='$user_id'";
-    $result_check=mysqli_query($conn,$sql_check);
-    if(mysqli_fetch_assoc($result_check)==0){
-    $sql="INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `start_time`,`no_of_hr`,`exit_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$start_time','$no_of_hr','$exit_time')";
-    //echo $sql;exit;
-    $result=mysqli_query($conn,$sql);
+    $exit_time = date('H:i', strtotime($start_time . '+ ' . $no_of_hr . ' hour'));
     //echo $exit_time; exit;
-}else {
-$sql="UPDATE `parking_details` SET `slot_date`='$slot_date',`start_time`='$slot_time',`no_of_hr`='$no_of_hr',`exit_time`='$exit_time' WHERE $user_id='$user_id'";
-$result=mysqli_query($conn,$sql);
-}
+    $sql_check = "SELECT * FROM parking_details WHERE user_id='$user_id'";
+    $result_check = mysqli_query($conn, $sql_check);
+    if (mysqli_fetch_assoc($result_check) == 0) {
+        $sql = "INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `start_time`,`no_of_hr`,`exit_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$start_time','$no_of_hr','$exit_time')";
+
+        $result = mysqli_query($conn, $sql);
+    } else {
+        $sql = "UPDATE `parking_details` SET `slot_date`='$slot_date',`start_time`='$slot_time',`no_of_hr`='$no_of_hr',`exit_time`='$exit_time' WHERE $user_id='$user_id'";
+        $result = mysqli_query($conn, $sql);
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +52,6 @@ $result=mysqli_query($conn,$sql);
         padding-top: 20px;
     }
 
-
     body {
         background-image: url('images/wall.jpg');
         position: auto;
@@ -76,28 +69,24 @@ $result=mysqli_query($conn,$sql);
         <hr>
         <div class="row">
             <?php
-                $sql_slot="SELECT * FROM slot_master";
-                $result_slot=mysqli_query($conn,$sql_slot);
-                while($data=mysqli_fetch_array($result_slot)){
-                if($data['slot_status']==0){ ?>
-
+            $sql_slot = "SELECT * FROM slot_master";
+            $result_slot = mysqli_query($conn, $sql_slot);
+            while ($data = mysqli_fetch_array($result_slot)) {
+                if ($data['slot_status'] == 0) { ?>
             <div class="col-lg-2">
                 <a type=" button" class="btn btn-outline-primary btn-lg btn-block"
-                    href="source/confirm_slot.php?slot_id=<?php echo $data['slot_id'];?>&&user_id=<?php echo $user_id;?>">Slot
-                    <?php echo $data['slot_id'];?>
+                    href="source/confirm_slot.php?slot_id=<?php echo $data['slot_id']; ?>&&user_id=<?php echo $user_id; ?>">Slot
+                    <?php echo $data['slot_id']; ?>
                 </a>
             </div>
-
-            <?php }
-                else if($data['slot_status']==1){ ?>
-
+            <?php } else if ($data['slot_status'] == 1) { ?>
             <div class="col-lg-2">
                 <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Slot
-                    <?php echo $data['slot_id'];?>
+                    <?php echo $data['slot_id']; ?>
                 </button>
             </div>
-
-            <?php  } }?>
+            <?php  }
+            } ?>
             <br>
             <p>
                 <small>
