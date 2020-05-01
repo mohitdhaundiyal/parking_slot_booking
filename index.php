@@ -1,6 +1,4 @@
-<?php
-include('include/connect.php');
-?>
+<?php include('include/connect.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,22 +11,45 @@ include('include/connect.php');
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-    .container {
-        text-align: center;
-        margin-top: 15%;
-    }
+        body {
 
-    .list-group-item {
-        padding: 20px !important;
-        font-size: 1.5rem;
-        transition: all 0.5s ease;
-        color: black;
-    }
+            background-position: center;
+            width: 100%;
+            height: auto;
+        }
 
-    .list-group-item:hover {
-        background: black;
-        color: white;
-    }
+        .container {
+            text-align: center;
+        }
+
+        .card {
+            margin-top: 10%;
+            border-radius: 0 !important;
+        }
+
+        .list-group-item {
+            padding: 20px !important;
+            font-size: 1.5rem;
+            transition: all 0.5s ease;
+            color: black;
+        }
+
+        .list-group-item {
+            border-radius: 0px !important;
+        }
+
+        .list-group-item:hover {
+            background: black;
+            color: white;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        .heading {
+            padding-top: 20px;
+        }
     </style>
 </head>
 
@@ -38,6 +59,11 @@ include('include/connect.php');
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
+                <div class="heading">
+                    <img src="images/icon.jpg" height="100px" width="100px">
+                    <h2>Online Parking Reservation System</h2>
+                    <h4>Book Your Parking Slot in Advance</h4>
+                </div>
                 <div class="card">
                     <ul class=" list-group list-group-flush">
                         <a href="register.php" class="list-group-item">Register</a>
@@ -49,6 +75,7 @@ include('include/connect.php');
             <div class="col-lg-1"></div>
         </div>
     </div>
+    <?php include('footer.php'); ?>
 </body>
 
 </html>

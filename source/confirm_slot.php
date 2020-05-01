@@ -27,20 +27,20 @@ $user_vehicleno = $row_datetime['user_vehicleno'];
     <link href="../assets/css/style.css" rel="stylesheet" />
 
     <style>
-    .card {
-        border: 1px solid black;
-        border-radius: 0px;
-    }
+        .card {
+            border: 1px solid black;
+            border-radius: 0px;
+        }
 
-    .btn {
-        border-radius: 0px;
-    }
+        .btn {
+            border-radius: 0px;
+        }
 
-    .container {
-        margin-top: 200px;
-        position: auto;
+        .container {
+            margin-top: 200px;
+            position: auto;
 
-    }
+        }
     </style>
 </head>
 
@@ -66,15 +66,12 @@ $user_vehicleno = $row_datetime['user_vehicleno'];
                             </h4>
 
                         </center>
-                        <form
-                            action="confirm_slot2.php?user_id=<?php echo $user_id; ?>&&slot_id=<?php echo $slot_id; ?>"
-                            method="post">
+                        <form action="confirm_slot2.php?user_id=<?php echo $user_id; ?>&&slot_id=<?php echo $slot_id; ?>" method="post">
                             <center>
                                 <button type="submit" name="submit" class="btn btn-success">YES</button>
 
 
-                                <a href="cancel_slot.php?user_id=<?php echo $user_id; ?>&&slot_id=<?php echo $slot_id; ?>"
-                                    class="btn btn-primary">NO</a>
+                                <a href="cancel_slot.php?user_id=<?php echo $user_id; ?>&&slot_id=<?php echo $slot_id; ?>" class="btn btn-primary">NO</a>
                             </center>
                         </form>
                     </div>

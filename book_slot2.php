@@ -6,33 +6,13 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
 include('include/connect.php');
 
 $user_id = $_GET['user_id'];
-$sql_user = "SELECT * FROM users WHERE user_id='$user_id'";
-$result_user = mysqli_query($conn, $sql_user);
-$row_user = mysqli_fetch_assoc($result_user);
-$user_name = $row_user['user_name'];
-$user_vehicleno = $row_user['user_vehicleno'];
-
-if (isset($_POST['submit'])) {
-    $slot_date = $_POST['slot_date'];
-    //echo $slot_date; exit;
-    $start_time = $_POST['start_time'];
-    $no_of_hr = $_POST['no_of_hr'];
-    //echo $slot_date;
-
-    $exit_time = date('H:i', strtotime($start_time . '+ ' . $no_of_hr . ' hour'));
-    //echo $exit_time; exit;
-    $sql_check = "SELECT * FROM parking_details WHERE user_id='$user_id'";
-    $result_check = mysqli_query($conn, $sql_check);
-    if (mysqli_fetch_assoc($result_check) == 0) {
-        $sql = "INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `start_time`,`no_of_hr`,`exit_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$start_time','$no_of_hr','$exit_time')";
-
-        $result = mysqli_query($conn, $sql);
-    } else if (mysqli_fetch_assoc($result_check) == 1) {
-        $sql = "UPDATE `parking_details` SET `slot_date`='$slot_date',`start_time`='$start_time',`no_of_hr`='$no_of_hr',`exit_time`='$exit_time' WHERE $user_id='$user_id'";
-        $result = mysqli_query($conn, $sql);
-    }
-}
+//POST DATA from select_datetime.php
+$slot_date = $_POST['slot_date'];
+$start_time = $_POST['start_time'];
+$no_of_hr = $_POST['no_of_hr'];
+$exit_time = date('H:i', strtotime($start_time . '+ ' . $no_of_hr . ' hour'));
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,22 +68,18 @@ if (isset($_POST['submit'])) {
                     $sql_time = "SELECT * FROM parking_details";
                     $result_time = mysqli_query($conn, $sql_time);
                     $row_time = mysqli_fetch_assoc($result_time);
-                    echo $row_time['start_time'];
-                    echo $row_time['exit_time'];
-                    echo $start_time;
-                    echo $_POST['end_time'];
-                    exit;
-                    if (($_POST['start_time'] < $row_time['start_time'] && $_POST['exit_time'] < $row_time['start_time']) ||
-                        ($_POST['start_time'] > $row_time['exit_time'] && $_POST['exit_time'] > $row_time['exit_time'])
+
+                    if (($start_time < $row_time['start_time'] && $exit_time <= $row_time['start_time']) ||
+                        ($start_time >= $row_time['exit_time'] && $exit_time > $row_time['exit_time'])
                     ) {
-                    ?> <div class="col-lg-2">
+                    ?>
+                        <div class="col-lg-2">
                             <hr>
                             <a type=" button" class="btn btn-outline-primary btn-lg btn-block" href="source/confirm_slot.php?slot_id=<?php echo $data['slot_id']; ?>&&user_id=<?php echo $user_id; ?>">Slot
                                 <?php echo $data['slot_id']; ?>
                             </a>
                         </div>
-                    <?php } else {
-                    ?>
+                    <?php } else { ?>
                         <div class="col-lg-2">
                             <hr>
                             <button type="button" class="btn btn-danger btn-lg btn-block" disabled>Slot
@@ -127,3 +103,23 @@ if (isset($_POST['submit'])) {
 </body>
 
 </html>
+
+<?php
+$sql_user = "SELECT * FROM users WHERE user_id='$user_id'";
+$result_user = mysqli_query($conn, $sql_user);
+$row_user = mysqli_fetch_assoc($result_user);
+$user_name = $row_user['user_name'];
+$user_vehicleno = $row_user['user_vehicleno'];
+if (isset($_POST['submit'])) {
+    $sql_check = "SELECT * FROM parking_details WHERE user_id='$user_id'";
+    $result_check = mysqli_query($conn, $sql_check);
+    if (mysqli_fetch_assoc($result_check) == 0) {
+        $sql = "INSERT INTO `parking_details`(`user_vehicleno`, `user_name`,`user_id`, `slot_date`, `start_time`,`no_of_hr`,`exit_time`) VALUES ('$user_vehicleno','$user_name','$user_id','$slot_date','$start_time','$no_of_hr','$exit_time')";
+
+        $result = mysqli_query($conn, $sql);
+    } else if (mysqli_fetch_assoc($result_check) == 1) {
+        $sql = "UPDATE `parking_details` SET `slot_date`='$slot_date',`start_time`='$start_time',`no_of_hr`='$no_of_hr',`exit_time`='$exit_time' WHERE $user_id='$user_id'";
+        $result = mysqli_query($conn, $sql);
+    }
+}
+?>

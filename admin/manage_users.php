@@ -11,16 +11,16 @@ include('../include/connect.php');
     <link href="../assets/css/bootstrap.css" rel="stylesheet" />
     <link href="../assets/css/style.css" rel="stylesheet" />
     <style>
-    .container-fluid {
-        padding-top: 20px;
-        padding-right: 20px;
-        padding-left: 20px;
-    }
+        .container-fluid {
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <?php include('header.php');?>
+    <?php include('header.php'); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -41,24 +41,22 @@ include('../include/connect.php');
                         </thead>
                         <tbody>
                             <?php $sql = "SELECT * from users";
-									    $result=mysqli_query($conn,$sql);
-									    $cnt=1;
-                                        while($data=mysqli_fetch_array($result)){                                    
-									    ?>
-                            <tr class="odd gradeX">
-                                <td class="center"><?php echo $data['user_id'];?></td>
-                                <td class="center"><?php echo strtoupper($data['user_name']);?></td>
-                                <td class="center"><?php echo $data['user_email'];?></td>
-                                <td class="center"><?php echo ($data['user_contactno']);?></td>
-                                <td class="center"><?php echo $data['user_address'];?></td>
-                                <td class="center"><?php echo $data['user_vehicleno'];?></td>
-                                <td><a class="btn btn-primary"
-                                        href="update_user.php?user_id=<?php echo $data['user_id'];?>">UPDATE</a>&nbsp;
-                                    <a class="btn btn-danger"
-                                        href="source/delete_user.php?user_id=<?php echo $data['user_id'];?>">DELETE</a>
-                                </td>
+                            $result = mysqli_query($conn, $sql);
+                            $cnt = 1;
+                            while ($data = mysqli_fetch_array($result)) {
+                            ?>
+                                <tr class="odd gradeX">
+                                    <td class="center"><?php echo $data['user_id']; ?></td>
+                                    <td class="center"><?php echo strtoupper($data['user_name']); ?></td>
+                                    <td class="center"><?php echo $data['user_email']; ?></td>
+                                    <td class="center"><?php echo ($data['user_contactno']); ?></td>
+                                    <td class="center"><?php echo $data['user_address']; ?></td>
+                                    <td class="center"><?php echo $data['user_vehicleno']; ?></td>
+                                    <td><a class="btn btn-primary" href="update_user.php?user_id=<?php echo $data['user_id']; ?>">UPDATE</a>&nbsp;
+                                        <a class="btn btn-danger" href="source/delete_user.php?user_id=<?php echo $data['user_id']; ?>">DELETE</a>
+                                    </td>
                                 <?php } ?>
-                            </tr>
+                                </tr>
                         </tbody>
                     </table>
                 </div>

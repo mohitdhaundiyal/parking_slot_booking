@@ -101,3 +101,20 @@ if(isset($_POST['submit'])){
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+/*echo "user input " . $start_time . "<br>";
+echo "from db " . $row_time['start_time'] . "<br>";
+if ($start_time > $row_time['start_time']) {
+    echo "input>db";
+} else {
+    echo "input<db";
+}
+exit;

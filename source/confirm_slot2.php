@@ -58,22 +58,31 @@ $row3 = mysqli_fetch_assoc($result3);
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
-    .fa {
-        color: black;
-        padding: 10px;
-    }
+        .fa {
+            color: black;
+            padding: 10px;
+        }
 
-    .container {
-        padding-top: 20px;
-    }
+        .container {
+            padding-top: 20px;
+        }
 
-    .card {
-        border-radius: 0px;
-    }
+        .card {
+            border-radius: 0px;
+        }
 
-    .btn {
-        border-radius: 0px;
-    }
+        .btn {
+            border-radius: 0px;
+        }
+
+        h5 {
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        small {
+            font-size: 15px;
+        }
     </style>
 </head>
 
@@ -102,10 +111,11 @@ $row3 = mysqli_fetch_assoc($result3);
             <div class="col-lg-6">
                 <center>
                     <div class="card" style="width: 22rem;">
-                        <img src="<?php echo $file ?>" class="card-img-top"
-                            style="width:200px;height:200px; margin-left: auto;margin-right: auto;" alt="booking qr">
-                        <div class="card"
-                            style="padding:2px;border: 2px solid black;border-left:none;border-right:0px;border-radius:0px;">
+                        <h5>ONLINE PARKING BOOKING</h5>
+                        <small>**Address** <?php echo date("d-m-Y") . ' ' . date("h:iA"); ?></small>
+                        <hr>
+                        <img src="<?php echo $file ?>" class="card-img-top" style="width:200px;height:200px; margin-left: auto;margin-right: auto;" alt="booking qr">
+                        <div class="card" style="padding:2px;border: 2px solid black;border-left:none;border-right:0px;border-radius:0px;">
                             TICKET NUMBER :
                             <?PHP echo $booking_code ?>
                         </div>
@@ -115,12 +125,13 @@ $row3 = mysqli_fetch_assoc($result3);
                             <li class="list-group-item">DATE : <?php echo $row['slot_date']; ?></li>
                             <li class="list-group-item">TIME : <?php echo $row['start_time']; ?></li>
                             <li class="list-group-item">VEHICLE NUMBER : <?php echo $row['user_vehicleno']; ?></li>
+                            <li class="list-group-item">TOTAL PRICE : ₹<?php echo $row['no_of_hr'] * 10; ?></li>
+
                             <li class="list-group-item"><b>PLEASE SHOW THIS QR CODE DURING ENTRY & EXIT</b></li>
                         </ul>
                     </div>
                     <div>
-                        <a href="../ticket.php?slot_id=<?php echo $slot_id; ?>&&user_id=<?php echo $user_id; ?>"><i
-                                class="fa fa-download fa-2x" aria-hidden="true"></i>
+                        <a href="../ticket.php?slot_id=<?php echo $slot_id; ?>&&user_id=<?php echo $user_id; ?>"><i class="fa fa-download fa-2x" aria-hidden="true"></i>
                         </a>
                     </div>
 

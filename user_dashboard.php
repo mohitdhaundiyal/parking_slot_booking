@@ -21,25 +21,25 @@ $row = mysqli_fetch_array($result);
     <link href="assets/css/style.css" rel="stylesheet" />
 
     <style>
-    body {
-        background-image: url('images/wal6.jpg');
-        position: auto;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-    }
+        body {
+            background-image: url('images/wal6.jpg');
+            position: auto;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
 
-    .container {
-        padding-top: 20px;
-    }
+        .container {
+            padding-top: 20px;
+        }
 
-    .btn {
-        border-radius: 0px;
-    }
+        .btn {
+            border-radius: 0px;
+        }
 
-    .jumbotron {
-        border-radius: 0px;
-    }
+        .jumbotron {
+            border-radius: 0px;
+        }
     </style>
 </head>
 
@@ -53,16 +53,14 @@ $row = mysqli_fetch_array($result);
             <p class="lead">List & Rent your Space for Parking.</p>
             <center>
                 <hr class="my-4">
-                <a class="btn btn-info btn-lg"
-                    href="source/selected_datetime.php?user_id=<?php echo $row['user_id'] ?>&&user_id=<?php echo $user_id; ?>"
-                    role="button">Search</a>
-                <a class="btn btn-primary btn-lg" href="check_booking.php?user_id=<?php echo $row['user_id'] ?>"
-                    role="button">Book</a>
-                <a class="btn btn-danger btn-lg"
-                    href="source/selected_datetime.php?user_id=<?php echo $row['user_id'] ?>" role="button">Cancel</a>
+                <a class="btn btn-info btn-lg" href="search.php" role="button">Search</a>
+                <a class="btn btn-primary btn-lg" href="check_booking.php?user_id=<?php echo $row['user_id'] ?>" role="button">Book</a>
+                <a class="btn btn-danger btn-lg" href="source/selected_datetime.php?user_id=<?php echo $row['user_id'] ?>" role="button">Cancel</a>
             </center>
         </div>
     </div>
+    <?php include('footer.php'); ?>
+
 </body>
 
 </html>

@@ -18,36 +18,52 @@ include('../include/connect.php');
     <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <script language="javascript">
-    $(document).ready(function() {
-        $("#txtdate").datepicker({
-            minDate: 0,
-            maxDate: 1
+        $(document).ready(function() {
+            $("#txtdate").datepicker({
+                minDate: 0,
+                maxDate: 1
+            });
         });
-    });
     </script>
 
     <style>
-    .card {
-        border: 1px solid black;
-        border-radius: 0px;
-    }
+        .card {
+            border: 1px solid black;
+            border-radius: 0px;
+        }
 
-    .card-header {
-        border-bottom: 1px solid black;
-    }
+        .card-header {
+            border-bottom: 1px solid black;
+        }
 
-    .form-control,
-    .btn,
-    .custom-select {
-        border-radius: 0px;
-    }
+        .form-control,
+        .btn,
+        .custom-select {
+            border-radius: 0px;
+        }
 
-    .container {
-        margin-top: 200px;
-        position: auto;
+        .container {
+            margin-top: 150px;
+            position: auto;
+        }
 
-    }
+        #price {
+            margin-top: 50px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 15px;
+        }
+
+        #service_card {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-right: none;
+            border-left: none;
+        }
     </style>
 </head>
 
@@ -61,13 +77,13 @@ include('../include/connect.php');
                         Enter Details
                     </div>
                     <div class="card-body">
-                        <form action="../book_slot.php?user_id=<?php echo $_SESSION['user_id']; ?>" method="post">
+                        <form action="../book_slot2.php?user_id=<?php echo $_SESSION['user_id']; ?>" method="post">
 
                             <div class="form-label"><small><b>Date</b></small></div>
-                            <input type="text" name="slot_date" id="txtdate" class="form-control" required>
+                            <input type="text" name="slot_date" id="txtdate" placeholder="MM/DD/YY" class="form-control" required>
 
                             <div class="form-label"><small><b>Start Time [hh:mm:AM/PM]</b></small></div>
-                            <input type="time" name="start_time" class="form-control" required>
+                            <input type="time" id="time" name="start_time" class="form-control" required>
 
                             <div class="form-label"><small><b>Select no. of hours</b></small></div>
                             <select class="custom-select mr-sm-2" name="no_of_hr" required>
@@ -81,18 +97,44 @@ include('../include/connect.php');
                                 <option value="7">7</option>
                                 <option value="8">8</option>
                             </select>
-                            <br>
-                            <br>
+                            <div class="card" id="service_card">
 
+                                <b>Additionl Services:</b>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <label class="form-check-label" for="gridCheck">
+                                        Valet Parking
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                                    <label class="form-check-label" for="gridCheck">
+                                        Car Washing
+                                    </label>
+                                </div>
+
+                            </div>
                             <button type="submit" name="submit" class="btn btn-success">Confirm</button>
                             <a href="../user_dashboard.php" class="btn btn-primary">Cancel</a>
                         </form>
                     </div>
                 </div>
+                <div id="price">
+                    <p class="alert alert-dark">
+                        Parking is ₹10/-
+                    </p>
+                    <p class="alert alert-dark">
+                        Valet Parking is ₹10/-
+                    </p>
+                    <p class="alert alert-dark">
+                        Car Washing: ₹550/-
+                    </p>
+                </div>
             </div>
             <div class="col-lg-4"></div>
         </div>
     </div>
+    <?php include('../footer.php'); ?>
 
 </body>
 
