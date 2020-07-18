@@ -1,2 +1,2 @@
-# Parking
-Online Parking Reservation System
+# parking
+online parking system
