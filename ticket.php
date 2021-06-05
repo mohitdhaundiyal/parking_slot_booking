@@ -40,7 +40,7 @@ $data .= '
 	<div style="text-align:center;border:3px solid black;">
 	<h2>ONLINE PARKING BOOKING</h2>
 	<h3>**Address**</h3>
-	<img src="uploads/qr_codes/' . $row['qr_code'] . '" style="width:300px;height:300px; margin-left: auto; margin-right: auto;">
+	<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' . $row['booking_code'] . '&choe=UTF-8" style="width:300px;height:300px; margin-left: auto; margin-right: auto;">
 
 		<div class="card" style="padding:3px;border: 2px solid black;border-left:none; border-right:0px;border-radius:0px;">
 		

@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse" id="header1">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a href="#" class="nav-link">About<span class="sr-only">(current)</span></a>
+                <a href="" class="nav-link">About<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a href="admin/admin_login.php" class="nav-link">

@@ -8,7 +8,7 @@
         footer {
             padding-top: 20px;
             bottom: 0px;
-            position: absolute;
+            position: relative;
             color: white;
             background-color: black;
             width: 100%;

@@ -67,7 +67,7 @@
                             <form action="source/user_register.php" method="post" enctype="multipart/form-data">
                                 <input class="form-control" type="text" placeholder="Name" name="user_name" required><br>
                                 <input class="form-control" type="text" placeholder="E-mail" name="user_email" required><br>
-                                <input class="form-control" type="number" placeholder="Contact Number" name="user_contactno" required><br>
+                                <input class="form-control" max="10" type="number" placeholder="Contact Number" name="user_contactno" required><br>
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="user_gender" value="male">Male

@@ -5,7 +5,6 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
 }
 
 include('../include/connect.php');
-include('../assets/phpqrcode-master/qrlib.php');
 
 $user_id = $_GET['user_id'];
 $slot_id = $_GET['slot_id'];
@@ -25,24 +24,27 @@ $sql3 = "UPDATE `slot_master` SET `slot_status`=1 WHERE slot_id=$slot_id";
 
 $result3 = mysqli_query($conn, $sql3);
 
-$filename = $user_id . $slot_id;
-$path = '../uploads/qr_codes/';
-$file = $path . $filename . ".png";
-$file2 = $filename . ".png";
-//ECHO $file2;exit;
-$ecc = 'L';
-$pixel_Size = 20;
-$frame_Size = 5;
+// $filename = $user_id . $slot_id;
+// $path = '../uploads/qr_codes/';
+// $file = $path . $filename . ".png";
 
-QRcode::png($booking_code, $file, $ecc, $pixel_Size, $frame_Size);
+// $file2 = $filename . ".png";
+
+$qr = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=$booking_code&choe=UTF-8";
 
 
-$sql2 = "UPDATE `parking_details` SET `slot_id`='$slot_id',`booking_code`='$booking_code', `qr_code`='$file2' WHERE user_id=$user_id";
+//QRcode::png($booking_code, $file, $ecc, $pixel_Size, $frame_Size);
+//echo "<img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='.$booking_code.'&choe=UTF-8' />";
+
+
+$sql2 = "UPDATE `parking_details` SET `slot_id`='$slot_id',`booking_code`='$booking_code', `qr_code`='$qr' WHERE user_id=$user_id";
 $result2 = mysqli_query($conn, $sql2);
-//echo $sql2;exit;
+//echo $qr;
+//echo $sql2;
 $sql3 = "SELECT * FROM `users` WHERE `user_id`='$user_id'";
 $result3 = mysqli_query($conn, $sql3);
 $row3 = mysqli_fetch_assoc($result3);
+
 
 //echo "<center><img src='".$file."'></center>"; 
 ?>
@@ -114,7 +116,9 @@ $row3 = mysqli_fetch_assoc($result3);
                         <h5>ONLINE PARKING BOOKING</h5>
                         <small>**Address** <?php echo date("d-m-Y") . ' ' . date("h:iA"); ?></small>
                         <hr>
-                        <img src="<?php echo $file ?>" class="card-img-top" style="width:200px;height:200px; margin-left: auto;margin-right: auto;" alt="booking qr">
+                        <img src="<?php echo $qr ?>" class="card-img-top" style="width:200px;height:200px; margin-left: auto;margin-right: auto;" alt="booking qr">
+                        <!-- <?php echo "<img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='.$booking_code.'&choe=UTF-8' />";
+ ?> -->
                         <div class="card" style="padding:2px;border: 2px solid black;border-left:none;border-right:0px;border-radius:0px;">
                             TICKET NUMBER :
                             <?PHP echo $booking_code ?>
